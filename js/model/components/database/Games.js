@@ -52,3 +52,5 @@ const Games = (() => {
     deleteAllGames,
   };
 })();
+
+export default Games;

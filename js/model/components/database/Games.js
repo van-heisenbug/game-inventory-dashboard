@@ -36,21 +36,12 @@ export function Games() {
 
   // MUTATE
 
-  // Check deleteAllGames for comments.
   const updateGameRecord = (newGameRecord) => {
-    retrieveAllGames(); // Can throw Error.
-    localStorage.setItem(LS_KEY, newGameRecord);
+    localStorage.setItem(LS_KEY, JSON.stringify(newGameRecord));
     return true;
   };
 
-  // Delete all games and return true.
-  // always return true or retrieveAllGames throws an error.
   const deleteAllGames = () => {
-    // Checks if games exist.
-    // This throws an Error
-    // so it stops deleteAllGames execution.
-    retrieveAllGames();
-
     localStorage.removeItem(LS_KEY);
     return true;
   };

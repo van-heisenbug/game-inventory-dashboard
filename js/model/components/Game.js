@@ -2,18 +2,36 @@
 import { STOCK_CHANGE_REASON } from "../constants/stockChangeReason.js";
 
 // # GAME FACTORY
-export function Game({ name, stock, price, genre, testId } = {}) {
+export function Game({
+  id = crypto.randomUUID(), // now, I can omit this if it's a new build and pass saved id when rebuilding.
+  name,
+  stock,
+  price,
+  genre,
+  stockHistory: savedHistory = [], // destructuring
+} = {}) {
   // # MUTABLE
-  const stockHistory = [];
+  // const stockHistory = [];
+  const stockHistory = [...savedHistory];
 
-  // # Check README.md
-  recordStockChange({
-    quantity: stock,
-    reason: STOCK_CHANGE_REASON.INITIAL_STOCK,
-  });
+  // Only saves as initial stock if there is no saveHistory data.
+  // Doesn't account whether a game is actually newly added or was previously deleted.
+  if (savedHistory.length === 0) {
+    recordStockChange({
+      quantity: stock,
+      reason: STOCK_CHANGE_REASON.INITIAL_STOCK,
+    });
+  }
 
+  // // # Check README.md
+  // recordStockChange({
+  //   quantity: stock,
+  //   reason: STOCK_CHANGE_REASON.INITIAL_STOCK,
+  // });
+
+  // TODO - When I save this to local storage and rebuild
+  // It will not be the same ID anymore.
   // const id = crypto.randomUUID();
-  const id = testId;
 
   // # READ
   const getId = () => id;
@@ -22,6 +40,19 @@ export function Game({ name, stock, price, genre, testId } = {}) {
   const getPriceInCents = () => price;
   const getStock = () => stock;
   const getStockHistory = () => structuredClone(stockHistory);
+
+  // AI gave me toJSON as it's a convention and easier.
+  // Will use this for now while I am learning.
+  const serializeGame = () => {
+    return {
+      id,
+      name,
+      genre,
+      price,
+      stock,
+      stockHistory: structuredClone(stockHistory),
+    };
+  };
 
   // # MUTATE
 
@@ -45,7 +76,7 @@ export function Game({ name, stock, price, genre, testId } = {}) {
     // # MUTABLE
     const stockChange = {
       quantity: count,
-      reason: addReason.replace(" ", "_").toUpperCase(),
+      reason: normalizeReason(addReason),
     };
 
     recordStockChange(stockChange);
@@ -61,8 +92,8 @@ export function Game({ name, stock, price, genre, testId } = {}) {
 
     // # MUTABLE
     const stockChange = {
-      quantity: count,
-      reason: removeReason.replace(" ", "_").toUpperCase(),
+      quantity: -count, // Started using Claude and learnt this from him.
+      reason: normalizeReason(removeReason),
     };
 
     recordStockChange(stockChange);
@@ -75,10 +106,16 @@ export function Game({ name, stock, price, genre, testId } = {}) {
     // Check README.md
     const stockChangeClone = {
       ...stockChange,
+      // TODO - When I store this to local storage, it will not be the same when I rebuild.
       date: new Date().toISOString(),
     };
 
     stockHistory.push(stockChangeClone);
+  }
+
+  // # HELPER
+  function normalizeReason(reason) {
+    return reason.replaceAll(" ", "_").toUpperCase();
   }
 
   return {
@@ -93,5 +130,6 @@ export function Game({ name, stock, price, genre, testId } = {}) {
     getStockHistory,
     addStock,
     removeStock,
+    serializeGame,
   };
 }

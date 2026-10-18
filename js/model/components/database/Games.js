@@ -1,7 +1,7 @@
 // # IMPORTS
 
 // Factory acting as mini database adapter - localStorage.
-export function Games() {
+const Games = (() => {
   const LS_KEY = "GAMES";
 
   // # READ
@@ -51,4 +51,4 @@ export function Games() {
     updateGameRecord,
     deleteAllGames,
   };
-}
+})();

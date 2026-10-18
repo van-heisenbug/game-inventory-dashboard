@@ -10,9 +10,9 @@ export function LineItem({ gameId, quantity } = {}) {
   const getGameId = () => gameId;
   const getQuantity = () => quantity;
   const getSubTotal = () => {
-    // Look from localStorage
+    // Look from database
     // # TODO
-    // Loop through the inventory and find the game.
+    // Loop through all available Games
     // # TODO
 
     // Check README.md

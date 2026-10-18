@@ -12,7 +12,7 @@ export function Game({
 } = {}) {
   // # MUTABLE
   // const stockHistory = [];
-  const stockHistory = [...savedHistory];
+  const stockHistory = structuredClone(savedHistory);
 
   // Only saves as initial stock if there is no saveHistory data.
   // Doesn't account whether a game is actually newly added or was previously deleted.
@@ -92,7 +92,7 @@ export function Game({
 
     // # MUTABLE
     const stockChange = {
-      quantity: -count, // Started using Claude and learnt this from him.
+      quantity: -count,
       reason: normalizeReason(removeReason),
     };
 

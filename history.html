@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Pixelshelf – Purchase history</title>
+    <link rel="stylesheet" href="css/storefront.css" />
+    <link rel="stylesheet" href="css/history.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.3-4.3" />
+      </symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24">
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" />
+      </symbol>
+      <symbol id="i-history" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <path
+          d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"
+        />
+      </symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="m16 17 5-5-5-5" />
+        <path d="M21 12H9" />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24">
+        <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
+      </symbol>
+      <symbol id="i-refund" viewBox="0 0 24 24">
+        <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+        <path d="M3 3v5h5" />
+      </symbol>
+      <symbol id="i-list" viewBox="0 0 24 24">
+        <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+        <path d="M12 15V3" />
+      </symbol>
+    </svg>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a href="storefront.html" class="brand">Pixelshelf</a>
+
+        <div class="header-actions">
+          <a href="cart.html" class="icon-link" aria-label="Cart" title="Cart">
+            <svg class="icon" aria-hidden="true"><use href="#i-cart" /></svg>
+          </a>
+
+          <details class="menu">
+            <summary aria-label="Account menu">
+              <span class="avatar" aria-hidden="true">A</span>
+              <span class="menu__name">Alex</span>
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-chevron" />
+              </svg>
+            </summary>
+            <div class="menu__panel">
+              <div class="menu__user">
+                <strong>Alex Rivera</strong>
+                <span>alex@example.com</span>
+              </div>
+              <a href="account.html" class="menu__item">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-settings" />
+                </svg>
+                Account settings
+              </a>
+              <a href="history.html" class="menu__item" aria-current="page">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-history" />
+                </svg>
+                Purchase history
+              </a>
+              <hr />
+              <button type="button" class="menu__item menu__item--danger">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-logout" />
+                </svg>
+                Sign out
+              </button>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="page-head">
+        <div>
+          <h1>Purchase history</h1>
+          <p>4 orders</p>
+        </div>
+        <label class="select">
+          <span class="sr-only">Sort orders</span>
+          <select name="sort">
+            <option value="newest">Sort: Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="total">Highest total</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filters">
+        <label class="search">
+          <span class="sr-only">Search orders</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-search" /></svg>
+          <input
+            type="search"
+            name="search"
+            placeholder="Search by order number or game"
+          />
+        </label>
+        <label class="select">
+          <span class="sr-only">Filter by status</span>
+          <select name="status">
+            <option value="">All statuses</option>
+            <option value="paid">Paid</option>
+            <option value="refunded">Refunded</option>
+          </select>
+        </label>
+        <label class="filter-btn" title="Orders placed within the last 3 days">
+          <input type="checkbox" id="filter-refund" class="sr-only" />
+          <svg class="icon" aria-hidden="true"><use href="#i-refund" /></svg>
+          Refund eligible
+        </label>
+      </div>
+
+      <div class="view-toggle" role="radiogroup" aria-label="Change view">
+        <label>
+          <input
+            type="radio"
+            name="view"
+            id="view-cards"
+            class="sr-only"
+            checked
+          />
+          <svg class="icon" aria-hidden="true"><use href="#i-grid" /></svg>
+          Cards
+        </label>
+        <label>
+          <input type="radio" name="view" id="view-list" class="sr-only" />
+          <svg class="icon" aria-hidden="true"><use href="#i-list" /></svg>
+          List
+        </label>
+      </div>
+
+      <p class="refund-note">
+        Paid orders can be cancelled for a refund within 3 days of purchase.
+      </p>
+
+      <ul class="orders">
+        <!-- Order 1 (placed Oct 18, inside the 3-day window) -->
+        <li data-refundable>
+          <article class="order">
+            <div class="order__head">
+              <div>
+                <p class="order__num">
+                  <a href="order.html">ORD-20261018-0042</a>
+                </p>
+                <p class="order__date">Oct 18, 2026</p>
+              </div>
+              <div class="order__right">
+                <span class="status">Paid</span>
+                <strong class="order__total">$124.96</strong>
+              </div>
+            </div>
+            <ul class="order__items">
+              <li class="order__item">
+                <span class="thumb" style="--hue: 18" aria-hidden="true"
+                  >H</span
+                >
+                <div>
+                  <p class="item-name">
+                    <a href="game.html?id=hades">Hades</a>
+                  </p>
+                  <p class="item-qty">2 × $24.99</p>
+                </div>
+                <span class="item-sub">$49.98</span>
+              </li>
+              <li class="order__item">
+                <span class="thumb" style="--hue: 350" aria-hidden="true"
+                  >E</span
+                >
+                <div>
+                  <p class="item-name">
+                    <a href="game.html?id=elden-ring">Elden Ring</a>
+                  </p>
+                  <p class="item-qty">1 × $59.99</p>
+                </div>
+                <span class="item-sub">$59.99</span>
+              </li>
+              <li class="order__item">
+                <span class="thumb" style="--hue: 150" aria-hidden="true"
+                  >S</span
+                >
+                <div>
+                  <p class="item-name">
+                    <a href="game.html?id=stardew-valley">Stardew Valley</a>
+                  </p>
+                  <p class="item-qty">1 × $14.99</p>
+                </div>
+                <span class="item-sub">$14.99</span>
+              </li>
+            </ul>
+            <div class="order__foot">
+              <span
+                >Credit or debit card<span class="deadline"
+                  >Cancel by Oct 21, 2026</span
+                ></span
+              >
+              <div class="order__actions">
+                <a href="order.html" class="btn btn--ghost">View order</a>
+                <a
+                  href="invoices/ORD-20261018-0042.pdf"
+                  download
+                  class="btn btn--ghost"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-download" />
+                  </svg>
+                  Invoice
+                </a>
+                <button type="button" class="btn btn--cancel">
+                  Cancel order
+                </button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <!-- Order 2 -->
+        <li>
+          <article class="order">
+            <div class="order__head">
+              <div>
+                <p class="order__num">
+                  <a href="order.html">ORD-20260927-0031</a>
+                </p>
+                <p class="order__date">Sep 27, 2026</p>
+              </div>
+              <div class="order__right">
+                <span class="status">Paid</span>
+                <strong class="order__total">$24.98</strong>
+              </div>
+            </div>
+            <ul class="order__items">
+              <li class="order__item">
+                <span class="thumb" style="--hue: 45" aria-hidden="true"
+                  >P</span
+                >
+                <div>
+                  <p class="item-name">
+                    <a href="game.html?id=portal-2">Portal 2</a>
+                  </p>
+                  <p class="item-qty">1 × $9.99</p>
+                </div>
+                <span class="item-sub">$9.99</span>
+              </li>
+              <li class="order__item">
+                <span class="thumb" style="--hue: 230" aria-hidden="true"
+                  >H</span
+                >
+                <div>
+                  <p class="item-name">
+                    <a href="game.html?id=hollow-knight">Hollow Knight</a>
+                  </p>
+                  <p class="item-qty">1 × $14.99</p>
+                </div>
+                <span class="item-sub">$14.99</span>
+              </li>
+            </ul>
+            <div class="order__foot">
+              <span>PayPal</span>
+              <div class="order__actions">
+                <a href="order.html" class="btn btn--ghost">View order</a>
+                <a
+                  href="invoices/ORD-20260927-0031.pdf"
+                  download
+                  class="btn btn--ghost"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-download" />
+                  </svg>
+                  Invoice
+                </a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <!-- Order 3 -->
+        <li>
+          <article class="order">
+            <div class="order__head">
+              <div>
+                <p class="order__num">
+                  <a href="order.html">ORD-20260805-0019</a>
+                </p>
+                <p class="order__date">Aug 5, 2026</p>
+              </div>
+              <div class="order__right">
+                <span class="status">Paid</span>
+                <strong class="order__total">$39.99</strong>
+              </div>
+            </div>
+            <ul class="order__items">
+              <li class="order__item">
+                <span class="thumb" style="--hue: 90" aria-hidden="true"
+                  >D</span
+                >
+                <div>
+                  <p class="item-name">
+                    <a href="game.html?id=disco-elysium">Disco Elysium</a>
+                  </p>
+                  <p class="item-qty">1 × $39.99</p>
+                </div>
+                <span class="item-sub">$39.99</span>
+              </li>
+            </ul>
+            <div class="order__foot">
+              <span>Credit or debit card</span>
+              <div class="order__actions">
+                <a href="order.html" class="btn btn--ghost">View order</a>
+                <a
+                  href="invoices/ORD-20260805-0019.pdf"
+                  download
+                  class="btn btn--ghost"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-download" />
+                  </svg>
+                  Invoice
+                </a>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <!-- Order 4 (refunded) -->
+        <li>
+          <article class="order">
+            <div class="order__head">
+              <div>
+                <p class="order__num">
+                  <a href="order.html">ORD-20260612-0007</a>
+                </p>
+                <p class="order__date">Jun 12, 2026</p>
+              </div>
+              <div class="order__right">
+                <span class="status status--refunded">Refunded</span>
+                <strong class="order__total">$19.99</strong>
+              </div>
+            </div>
+            <ul class="order__items">
+              <li class="order__item">
+                <span class="thumb" style="--hue: 275" aria-hidden="true"
+                  >C</span
+                >
+                <div>
+                  <p class="item-name">
+                    <a href="game.html?id=celeste">Celeste</a>
+                  </p>
+                  <p class="item-qty">1 × $19.99</p>
+                </div>
+                <span class="item-sub">$19.99</span>
+              </li>
+            </ul>
+            <div class="order__foot">
+              <span>Apple Pay</span>
+              <div class="order__actions">
+                <a href="order.html" class="btn btn--ghost">View order</a>
+                <a
+                  href="invoices/ORD-20260612-0007.pdf"
+                  download
+                  class="btn btn--ghost"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-download" />
+                  </svg>
+                  Invoice
+                </a>
+              </div>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">© 2026 Pixelshelf</div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+/* Admin users: load AFTER main.css (reuses its tokens, admin bar, toolbar, chips, table, avatar, footer) */
+
+.users-card table {
+  min-width: 820px;
+}
+
+.users-card .table-wrap {
+  overflow-x: auto;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.05rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.status--active {
+  color: #4ade80;
+  background: rgb(74 222 128 / 0.12);
+}
+
+.status--suspended {
+  color: var(--danger);
+  background: rgb(248 113 113 / 0.12);
+}
+
+.role--admin {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Row action icons */
+.icon-btn {
+  text-decoration: none;
+}
+
+.icon-btn--danger:hover:not(:disabled) {
+  color: var(--danger);
+  background: rgb(248 113 113 / 0.12);
+}
+
+.icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Filter chips (CSS only) */
+.users-card:has(#u-customers:checked) tbody tr:not([data-role="customer"]),
+.users-card:has(#u-admins:checked) tbody tr:not([data-role="admin"]),
+.users-card:has(#u-suspended:checked) tbody tr:not([data-status="suspended"]) {
+  display: none;
+}
+
+/* Add user panel: opened by the toolbar button (hidden checkbox, no JS) */
+label.btn {
+  position: relative;
+  cursor: pointer;
+}
+
+.btn:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.add-panel {
+  display: none;
+  padding: 1.25rem 1.5rem;
+  background: rgb(255 255 255 / 0.02);
+  border-bottom: 1px solid var(--border);
+}
+
+.users-card:has(#add-user-toggle:checked) .add-panel {
+  display: block;
+}
+
+.add-panel h2 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.add-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field input {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.field input:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(102 192 244 / 0.2);
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.add-actions {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}

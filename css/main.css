@@ -575,3 +575,224 @@ td.col-actions {
     grid-template-columns: 1fr;
   }
 }
+
+/* ================= v3: admin bar, row menu, quick filters ================= */
+.admin-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-bar__brand {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.admin-nav a {
+  padding: 0.45rem 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.admin-nav a:hover {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+.admin-nav a[aria-current="page"] {
+  color: var(--accent);
+  background: rgb(102 192 244 / 0.12);
+}
+
+/* Account menu (<details>, no JS) */
+.admin-menu {
+  position: relative;
+  margin-left: auto;
+}
+
+.admin-menu summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.6rem 0.25rem 0.25rem;
+  list-style: none;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.admin-menu summary::-webkit-details-marker,
+.row-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.admin-menu summary:hover,
+.admin-menu[open] summary {
+  background: var(--surface-raised);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.admin-menu__user {
+  padding: 0.6rem 0.7rem 0.7rem;
+  margin-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-menu__user strong,
+.admin-menu__user span {
+  display: block;
+}
+
+.admin-menu__user span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Shared dropdown panel + items */
+.menu-panel {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 30;
+  width: 14rem;
+  padding: 0.35rem;
+  list-style: none;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.45);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+  font-weight: 500;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+}
+
+.menu-item:hover {
+  background: #222e40;
+}
+
+.menu-item--danger {
+  color: var(--danger);
+}
+
+.menu-panel hr {
+  margin: 0.3rem 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* Row 3-dots menu */
+.row-menu {
+  position: relative;
+  text-align: left;
+}
+
+.row-menu[open] {
+  z-index: 30;
+}
+
+.row-menu[open] > summary {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+/* Quick filters: best selling / newly added (CSS only) */
+.quick-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 2.1rem;
+  padding: 0 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.chip:hover {
+  color: var(--text);
+  border-color: #34445c;
+}
+
+.chip:has(input:checked) {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.layout:has(#show-best:checked) tbody tr:not([data-best]),
+.layout:has(#show-new:checked) tbody tr:not([data-new]) {
+  display: none;
+}
+
+/* Wide screens: let menus hang outside the card instead of being clipped */
+@media (min-width: 769px) {
+  .layout > .card,
+  .table-wrap {
+    overflow: visible;
+  }
+}
+
+/* Phones: the row menu becomes a bottom sheet */
+@media (max-width: 768px) {
+  .row-menu[open] .row-menu__panel {
+    position: fixed;
+    inset: auto 1rem 1rem;
+    width: auto;
+    box-shadow: 0 -8px 40px rgb(0 0 0 / 0.6);
+  }
+
+  .admin-menu__name {
+    display: none;
+  }
+}

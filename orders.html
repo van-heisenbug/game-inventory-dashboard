@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixelshelf Admin – Orders</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/orders.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.3-4.3" />
+      </symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24">
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+        <circle cx="12" cy="12" r="3" />
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+        <path d="M12 15V3" />
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <path
+          d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"
+        />
+      </symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="m16 17 5-5-5-5" />
+        <path d="M21 12H9" />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
+    </svg>
+
+    <header class="admin-bar">
+      <a href="index.html" class="admin-bar__brand">Pixelshelf Admin</a>
+      <nav class="admin-nav" aria-label="Admin">
+        <a href="index.html">Games</a>
+        <a href="orders.html" aria-current="page">Orders</a>
+        <a href="users.html">Users</a>
+      </nav>
+      <details class="admin-menu">
+        <summary aria-label="Account menu">
+          <span class="avatar" aria-hidden="true">A</span>
+          <span class="admin-menu__name">Alex</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-chevron" /></svg>
+        </summary>
+        <div class="menu-panel admin-menu__panel">
+          <div class="admin-menu__user">
+            <strong>Alex Rivera</strong>
+            <span>alex@example.com</span>
+          </div>
+          <a href="account.html" class="menu-item">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-settings" />
+            </svg>
+            Account settings
+          </a>
+          <hr />
+          <button type="button" class="menu-item menu-item--danger">
+            <svg class="icon" aria-hidden="true"><use href="#i-logout" /></svg>
+            Sign out
+          </button>
+        </div>
+      </details>
+    </header>
+
+    <main>
+      <section class="card orders-card" aria-labelledby="page-title">
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <div class="toolbar__title">
+            <h1 id="page-title">Orders</h1>
+            <p>8 orders</p>
+          </div>
+
+          <div class="toolbar__controls">
+            <label class="search">
+              <span class="sr-only">Search orders</span>
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-search" />
+              </svg>
+              <input
+                type="search"
+                name="search"
+                placeholder="Order ID, buyer or game"
+              />
+            </label>
+
+            <label class="select">
+              <span class="sr-only">Filter by game</span>
+              <select name="game">
+                <option value="">All games</option>
+                <option>Celeste</option>
+                <option>Disco Elysium</option>
+                <option>Elden Ring</option>
+                <option>Hades</option>
+                <option>Hollow Knight</option>
+                <option>Portal 2</option>
+                <option>Stardew Valley</option>
+              </select>
+            </label>
+
+            <label class="select">
+              <span class="sr-only">Filter by order date</span>
+              <select name="date">
+                <option value="">Any date</option>
+                <option value="3">Last 3 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+            </label>
+
+            <button
+              type="button"
+              class="btn btn--icon"
+              aria-label="Export orders as CSV"
+              title="Export orders as CSV"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-download" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Status filters -->
+        <div
+          class="quick-filters"
+          role="radiogroup"
+          aria-label="Filter by order status"
+        >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="status"
+              id="f-all"
+              class="sr-only"
+              checked
+            />All orders</label
+          >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="status"
+              id="f-paid"
+              class="sr-only"
+            />Paid</label
+          >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="status"
+              id="f-refunded"
+              class="sr-only"
+            />Refunded</label
+          >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="status"
+              id="f-cancelled"
+              class="sr-only"
+            />Cancelled</label
+          >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="status"
+              id="f-eligible"
+              class="sr-only"
+            />Refund eligible</label
+          >
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrap">
+          <table>
+            <caption class="sr-only">
+              All orders, newest first
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Order</th>
+                <th scope="col">Buyer</th>
+                <th scope="col">Games</th>
+                <th scope="col" class="num">Qty</th>
+                <th scope="col">Payment</th>
+                <th scope="col" class="num">Total</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr data-status="paid" data-refundable>
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20261018-0042"
+                    >ORD-20261018-0042</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Alex Rivera</span
+                  ><span class="genre">alex@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=hades">Hades</a>
+                      <span>×2</span>
+                    </li>
+                    <li>
+                      <a href="game-details.html?id=elden-ring">Elden Ring</a>
+                      <span>×1</span>
+                    </li>
+                    <li>
+                      <a href="game-details.html?id=stardew-valley"
+                        >Stardew Valley</a
+                      >
+                      <span>×1</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">4</td>
+                <td>Credit or debit card</td>
+                <td class="num">$124.96</td>
+                <td>Oct 18, 2026</td>
+                <td>
+                  <span class="status status--paid">Paid</span
+                  ><span class="deadline">Cancel by Oct 21</span>
+                </td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20261018-0042"
+                    class="icon-btn"
+                    aria-label="View order ORD-20261018-0042"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+
+              <tr data-status="paid" data-refundable>
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20261017-0041"
+                    >ORD-20261017-0041</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Mia Chen</span
+                  ><span class="genre">mia.chen@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=hollow-knight"
+                        >Hollow Knight</a
+                      >
+                      <span>×1</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">1</td>
+                <td>PayPal</td>
+                <td class="num">$14.99</td>
+                <td>Oct 17, 2026</td>
+                <td>
+                  <span class="status status--paid">Paid</span
+                  ><span class="deadline">Cancel by Oct 20</span>
+                </td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20261017-0041"
+                    class="icon-btn"
+                    aria-label="View order ORD-20261017-0041"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+
+              <tr data-status="cancelled">
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20261016-0039"
+                    >ORD-20261016-0039</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Jordan Smith</span
+                  ><span class="genre">jordan.s@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=portal-2">Portal 2</a>
+                      <span>×2</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">2</td>
+                <td>Apple Pay</td>
+                <td class="num">$19.98</td>
+                <td>Oct 16, 2026</td>
+                <td><span class="status status--cancelled">Cancelled</span></td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20261016-0039"
+                    class="icon-btn"
+                    aria-label="View order ORD-20261016-0039"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+
+              <tr data-status="refunded">
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20261002-0036"
+                    >ORD-20261002-0036</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Priya Nair</span
+                  ><span class="genre">priya.nair@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=hades">Hades</a>
+                      <span>×1</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">1</td>
+                <td>Credit or debit card</td>
+                <td class="num">$24.99</td>
+                <td>Oct 2, 2026</td>
+                <td><span class="status status--refunded">Refunded</span></td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20261002-0036"
+                    class="icon-btn"
+                    aria-label="View order ORD-20261002-0036"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+
+              <tr data-status="paid">
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20260927-0031"
+                    >ORD-20260927-0031</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Alex Rivera</span
+                  ><span class="genre">alex@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=portal-2">Portal 2</a>
+                      <span>×1</span>
+                    </li>
+                    <li>
+                      <a href="game-details.html?id=hollow-knight"
+                        >Hollow Knight</a
+                      >
+                      <span>×1</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">2</td>
+                <td>PayPal</td>
+                <td class="num">$24.98</td>
+                <td>Sep 27, 2026</td>
+                <td><span class="status status--paid">Paid</span></td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20260927-0031"
+                    class="icon-btn"
+                    aria-label="View order ORD-20260927-0031"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+
+              <tr data-status="paid">
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20260915-0027"
+                    >ORD-20260915-0027</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Sam Okafor</span
+                  ><span class="genre">sam.okafor@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=disco-elysium"
+                        >Disco Elysium</a
+                      >
+                      <span>×1</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">1</td>
+                <td>Payoneer</td>
+                <td class="num">$39.99</td>
+                <td>Sep 15, 2026</td>
+                <td><span class="status status--paid">Paid</span></td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20260915-0027"
+                    class="icon-btn"
+                    aria-label="View order ORD-20260915-0027"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+
+              <tr data-status="paid">
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20260805-0019"
+                    >ORD-20260805-0019</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Alex Rivera</span
+                  ><span class="genre">alex@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=disco-elysium"
+                        >Disco Elysium</a
+                      >
+                      <span>×1</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">1</td>
+                <td>Credit or debit card</td>
+                <td class="num">$39.99</td>
+                <td>Aug 5, 2026</td>
+                <td><span class="status status--paid">Paid</span></td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20260805-0019"
+                    class="icon-btn"
+                    aria-label="View order ORD-20260805-0019"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+
+              <tr data-status="refunded">
+                <td class="order-id">
+                  <a href="order.html?id=ORD-20260612-0007"
+                    >ORD-20260612-0007</a
+                  >
+                </td>
+                <td>
+                  <span class="name">Alex Rivera</span
+                  ><span class="genre">alex@example.com</span>
+                </td>
+                <td>
+                  <ul class="games">
+                    <li>
+                      <a href="game-details.html?id=celeste">Celeste</a>
+                      <span>×1</span>
+                    </li>
+                  </ul>
+                </td>
+                <td class="num">1</td>
+                <td>Apple Pay</td>
+                <td class="num">$19.99</td>
+                <td>Jun 12, 2026</td>
+                <td><span class="status status--refunded">Refunded</span></td>
+                <td class="col-actions">
+                  <a
+                    href="order.html?id=ORD-20260612-0007"
+                    class="icon-btn"
+                    aria-label="View order ORD-20260612-0007"
+                    title="View"
+                    ><svg class="icon" aria-hidden="true">
+                      <use href="#i-eye" /></svg
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="table-footer">
+          <p>Showing 1–8 of 8 orders</p>
+          <div class="pager">
+            <button type="button" class="btn" disabled>Previous</button>
+            <button type="button" class="btn" disabled>Next</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

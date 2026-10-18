@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Pixelshelf – Browse games</title>
+    <link rel="stylesheet" href="css/storefront.css" />
+  </head>
+  <body>
+    <!-- Icon sprite: define once, reuse with <use href="#i-name"> -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.3-4.3" />
+      </symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24">
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" />
+      </symbol>
+      <symbol id="i-history" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <path
+          d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"
+        />
+      </symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="m16 17 5-5-5-5" />
+        <path d="M21 12H9" />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
+    </svg>
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="wrap">
+        <a href="storefront.html" class="brand">Pixelshelf</a>
+
+        <label class="search">
+          <span class="sr-only">Search games</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-search" /></svg>
+          <input type="search" name="search" placeholder="Search games" />
+        </label>
+
+        <div class="header-actions">
+          <a
+            href="cart.html"
+            class="icon-link"
+            aria-label="Cart, 2 items"
+            title="Cart"
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-cart" /></svg>
+            <span class="count" aria-hidden="true">2</span>
+          </a>
+
+          <!-- Account menu -->
+          <details class="menu">
+            <summary aria-label="Account menu">
+              <span class="avatar" aria-hidden="true">A</span>
+              <span class="menu__name">Alex</span>
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-chevron" />
+              </svg>
+            </summary>
+            <div class="menu__panel">
+              <div class="menu__user">
+                <strong>Alex Rivera</strong>
+                <span>alex@example.com</span>
+              </div>
+              <a href="account.html" class="menu__item">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-settings" />
+                </svg>
+                Account settings
+              </a>
+              <a href="history.html" class="menu__item">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-history" />
+                </svg>
+                Purchase history
+              </a>
+              <hr />
+              <button type="button" class="menu__item menu__item--danger">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-logout" />
+                </svg>
+                Sign out
+              </button>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="page-head">
+        <div>
+          <h1>Browse games</h1>
+          <p>8 games</p>
+        </div>
+        <label class="select">
+          <span class="sr-only">Sort games</span>
+          <select name="sort">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Genre filters -->
+      <div class="chips" role="group" aria-label="Filter by genre">
+        <button type="button" class="chip" aria-pressed="true">All</button>
+        <button type="button" class="chip" aria-pressed="false">Action</button>
+        <button type="button" class="chip" aria-pressed="false">
+          Platformer
+        </button>
+        <button type="button" class="chip" aria-pressed="false">Puzzle</button>
+        <button type="button" class="chip" aria-pressed="false">
+          Roguelike
+        </button>
+        <button type="button" class="chip" aria-pressed="false">RPG</button>
+        <button type="button" class="chip" aria-pressed="false">
+          Simulation
+        </button>
+      </div>
+
+      <!-- Game grid -->
+      <ul class="grid">
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 350" aria-hidden="true">E</div>
+            <div class="game__body">
+              <h3>Elden Ring</h3>
+              <p class="genre">Action</p>
+              <div class="game__foot">
+                <span class="price">$59.99</span>
+                <button type="button" class="btn">Add to cart</button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 18" aria-hidden="true">H</div>
+            <div class="game__body">
+              <h3>Hades</h3>
+              <p class="genre">Roguelike</p>
+              <div class="game__foot">
+                <span class="price">$24.99</span>
+                <button type="button" class="btn">Add to cart</button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 150" aria-hidden="true">S</div>
+            <div class="game__body">
+              <h3>Stardew Valley</h3>
+              <p class="genre">Simulation</p>
+              <p class="note">Only 12 left</p>
+              <div class="game__foot">
+                <span class="price">$14.99</span>
+                <button type="button" class="btn">Add to cart</button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 275" aria-hidden="true">C</div>
+            <div class="game__body">
+              <h3>Celeste</h3>
+              <p class="genre">Platformer</p>
+              <div class="game__foot">
+                <span class="price">$19.99</span>
+                <button type="button" class="btn" disabled>Out of stock</button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 205" aria-hidden="true">D</div>
+            <div class="game__body">
+              <h3>Dota 1</h3>
+              <p class="genre">RPG</p>
+              <div class="game__foot">
+                <span class="price">$45.22</span>
+                <button type="button" class="btn">Add to cart</button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 230" aria-hidden="true">H</div>
+            <div class="game__body">
+              <h3>Hollow Knight</h3>
+              <p class="genre">Platformer</p>
+              <div class="game__foot">
+                <span class="price">$14.99</span>
+                <button type="button" class="btn">Add to cart</button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 45" aria-hidden="true">P</div>
+            <div class="game__body">
+              <h3>Portal 2</h3>
+              <p class="genre">Puzzle</p>
+              <div class="game__foot">
+                <span class="price">$9.99</span>
+                <button type="button" class="btn">Add to cart</button>
+              </div>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="game">
+            <div class="cover" style="--hue: 90" aria-hidden="true">D</div>
+            <div class="game__body">
+              <h3>Disco Elysium</h3>
+              <p class="genre">RPG</p>
+              <div class="game__foot">
+                <span class="price">$39.99</span>
+                <button type="button" class="btn">Add to cart</button>
+              </div>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">© 2026 Pixelshelf</div>
+    </footer>
+  </body>
+</html>

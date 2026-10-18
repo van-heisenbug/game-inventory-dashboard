@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixelshelf Admin – Users</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/users.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m21 21-4.3-4.3" />
+      </symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24">
+        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+        <circle cx="12" cy="12" r="3" />
+      </symbol>
+      <symbol id="i-history" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24">
+        <path d="M3 6h18" />
+        <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
+        <path d="m19 6-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+        <path d="M10 11v6M14 11v6" />
+      </symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m7 10 5 5 5-5" />
+        <path d="M12 15V3" />
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <path
+          d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"
+        />
+      </symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="m16 17 5-5-5-5" />
+        <path d="M21 12H9" />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
+    </svg>
+
+    <header class="admin-bar">
+      <a href="index.html" class="admin-bar__brand">Pixelshelf Admin</a>
+      <nav class="admin-nav" aria-label="Admin">
+        <a href="index.html">Games</a>
+        <a href="orders.html">Orders</a>
+        <a href="users.html" aria-current="page">Users</a>
+      </nav>
+      <details class="admin-menu">
+        <summary aria-label="Account menu">
+          <span class="avatar" aria-hidden="true">A</span>
+          <span class="admin-menu__name">Alex</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-chevron" /></svg>
+        </summary>
+        <div class="menu-panel admin-menu__panel">
+          <div class="admin-menu__user">
+            <strong>Alex Rivera</strong>
+            <span>alex@example.com</span>
+          </div>
+          <a href="account.html" class="menu-item">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-settings" />
+            </svg>
+            Account settings
+          </a>
+          <hr />
+          <button type="button" class="menu-item menu-item--danger">
+            <svg class="icon" aria-hidden="true"><use href="#i-logout" /></svg>
+            Sign out
+          </button>
+        </div>
+      </details>
+    </header>
+
+    <main>
+      <section class="card users-card" aria-labelledby="page-title">
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <div class="toolbar__title">
+            <h1 id="page-title">Users</h1>
+            <p>7 registered users</p>
+          </div>
+
+          <div class="toolbar__controls">
+            <label class="search">
+              <span class="sr-only">Search users</span>
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-search" />
+              </svg>
+              <input
+                type="search"
+                name="search"
+                placeholder="Search by name or email"
+              />
+            </label>
+
+            <button
+              type="button"
+              class="btn btn--icon"
+              aria-label="Export users as CSV"
+              title="Export users as CSV"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-download" />
+              </svg>
+            </button>
+
+            <!-- Opens the add user panel (hidden checkbox, no JS) -->
+            <label class="btn btn--primary">
+              <input type="checkbox" id="add-user-toggle" class="sr-only" />
+              <svg class="icon" aria-hidden="true"><use href="#i-plus" /></svg>
+              Add user
+            </label>
+          </div>
+        </div>
+
+        <!-- Add user panel -->
+        <div class="add-panel">
+          <h2>Add user</h2>
+          <form class="add-form">
+            <div class="field">
+              <label for="new-name">Full name</label>
+              <input
+                id="new-name"
+                name="name"
+                type="text"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="new-email">Email address</label>
+              <input
+                id="new-email"
+                name="email"
+                type="email"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="new-role">Role</label>
+              <div class="select">
+                <select id="new-role" name="role">
+                  <option value="customer">Customer</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="new-password">Temporary password</label>
+              <input
+                id="new-password"
+                name="password"
+                type="password"
+                minlength="8"
+                autocomplete="new-password"
+                required
+              />
+              <span class="hint"
+                >At least 8 characters. They can change it later.</span
+              >
+            </div>
+            <div class="add-actions">
+              <label for="add-user-toggle" class="btn">Cancel</label>
+              <button type="submit" class="btn btn--primary">
+                Create user
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Filters -->
+        <div class="quick-filters" role="radiogroup" aria-label="Filter users">
+          <label class="chip"
+            ><input
+              type="radio"
+              name="show"
+              id="u-all"
+              class="sr-only"
+              checked
+            />All users</label
+          >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="show"
+              id="u-customers"
+              class="sr-only"
+            />Customers</label
+          >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="show"
+              id="u-admins"
+              class="sr-only"
+            />Admins</label
+          >
+          <label class="chip"
+            ><input
+              type="radio"
+              name="show"
+              id="u-suspended"
+              class="sr-only"
+            />Suspended</label
+          >
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrap">
+          <table>
+            <caption class="sr-only">
+              Registered users
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">User</th>
+                <th scope="col">Role</th>
+                <th scope="col">Status</th>
+                <th scope="col">Joined</th>
+                <th scope="col" class="num">Orders</th>
+                <th scope="col" class="num">Total spent</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr data-role="admin" data-status="active">
+                <td>
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">A</span>
+                    <div>
+                      <span class="name">Alex Rivera</span
+                      ><span class="genre">alex@example.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="role--admin">Admin</span></td>
+                <td><span class="status status--active">Active</span></td>
+                <td>Jun 1, 2026</td>
+                <td class="num">4</td>
+                <td class="num">$189.93</td>
+                <td class="col-actions">
+                  <div class="actions">
+                    <a
+                      href="user-details.html?id=alex-rivera"
+                      class="icon-btn"
+                      aria-label="View account details for Alex Rivera"
+                      title="Account details"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-eye" /></svg
+                    ></a>
+                    <a
+                      href="orders.html?buyer=alex-rivera"
+                      class="icon-btn"
+                      aria-label="View order history for Alex Rivera"
+                      title="Order history"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-history" /></svg
+                    ></a>
+                    <button
+                      type="button"
+                      class="icon-btn icon-btn--danger"
+                      aria-label="Delete Alex Rivera"
+                      title="You can't delete your own account"
+                      disabled
+                    >
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-trash" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-role="admin" data-status="active">
+                <td>
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">R</span>
+                    <div>
+                      <span class="name">Riley Santos</span
+                      ><span class="genre">riley@example.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="role--admin">Admin</span></td>
+                <td><span class="status status--active">Active</span></td>
+                <td>Jun 2, 2026</td>
+                <td class="num">0</td>
+                <td class="num">$0.00</td>
+                <td class="col-actions">
+                  <div class="actions">
+                    <a
+                      href="user-details.html?id=riley-santos"
+                      class="icon-btn"
+                      aria-label="View account details for Riley Santos"
+                      title="Account details"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-eye" /></svg
+                    ></a>
+                    <a
+                      href="orders.html?buyer=riley-santos"
+                      class="icon-btn"
+                      aria-label="View order history for Riley Santos"
+                      title="Order history"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-history" /></svg
+                    ></a>
+                    <button
+                      type="button"
+                      class="icon-btn icon-btn--danger"
+                      aria-label="Delete Riley Santos"
+                      title="Delete user"
+                    >
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-trash" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-role="customer" data-status="active">
+                <td>
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">S</span>
+                    <div>
+                      <span class="name">Sam Okafor</span
+                      ><span class="genre">sam.okafor@example.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Customer</td>
+                <td><span class="status status--active">Active</span></td>
+                <td>Sep 10, 2026</td>
+                <td class="num">1</td>
+                <td class="num">$39.99</td>
+                <td class="col-actions">
+                  <div class="actions">
+                    <a
+                      href="user-details.html?id=sam-okafor"
+                      class="icon-btn"
+                      aria-label="View account details for Sam Okafor"
+                      title="Account details"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-eye" /></svg
+                    ></a>
+                    <a
+                      href="orders.html?buyer=sam-okafor"
+                      class="icon-btn"
+                      aria-label="View order history for Sam Okafor"
+                      title="Order history"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-history" /></svg
+                    ></a>
+                    <button
+                      type="button"
+                      class="icon-btn icon-btn--danger"
+                      aria-label="Delete Sam Okafor"
+                      title="Delete user"
+                    >
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-trash" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-role="customer" data-status="active">
+                <td>
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">P</span>
+                    <div>
+                      <span class="name">Priya Nair</span
+                      ><span class="genre">priya.nair@example.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Customer</td>
+                <td><span class="status status--active">Active</span></td>
+                <td>Sep 28, 2026</td>
+                <td class="num">1</td>
+                <td class="num">$0.00</td>
+                <td class="col-actions">
+                  <div class="actions">
+                    <a
+                      href="user-details.html?id=priya-nair"
+                      class="icon-btn"
+                      aria-label="View account details for Priya Nair"
+                      title="Account details"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-eye" /></svg
+                    ></a>
+                    <a
+                      href="orders.html?buyer=priya-nair"
+                      class="icon-btn"
+                      aria-label="View order history for Priya Nair"
+                      title="Order history"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-history" /></svg
+                    ></a>
+                    <button
+                      type="button"
+                      class="icon-btn icon-btn--danger"
+                      aria-label="Delete Priya Nair"
+                      title="Delete user"
+                    >
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-trash" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-role="customer" data-status="active">
+                <td>
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">M</span>
+                    <div>
+                      <span class="name">Mia Chen</span
+                      ><span class="genre">mia.chen@example.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Customer</td>
+                <td><span class="status status--active">Active</span></td>
+                <td>Oct 10, 2026</td>
+                <td class="num">1</td>
+                <td class="num">$14.99</td>
+                <td class="col-actions">
+                  <div class="actions">
+                    <a
+                      href="user-details.html?id=mia-chen"
+                      class="icon-btn"
+                      aria-label="View account details for Mia Chen"
+                      title="Account details"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-eye" /></svg
+                    ></a>
+                    <a
+                      href="orders.html?buyer=mia-chen"
+                      class="icon-btn"
+                      aria-label="View order history for Mia Chen"
+                      title="Order history"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-history" /></svg
+                    ></a>
+                    <button
+                      type="button"
+                      class="icon-btn icon-btn--danger"
+                      aria-label="Delete Mia Chen"
+                      title="Delete user"
+                    >
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-trash" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-role="customer" data-status="active">
+                <td>
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">J</span>
+                    <div>
+                      <span class="name">Jordan Smith</span
+                      ><span class="genre">jordan.s@example.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Customer</td>
+                <td><span class="status status--active">Active</span></td>
+                <td>Oct 14, 2026</td>
+                <td class="num">1</td>
+                <td class="num">$0.00</td>
+                <td class="col-actions">
+                  <div class="actions">
+                    <a
+                      href="user-details.html?id=jordan-smith"
+                      class="icon-btn"
+                      aria-label="View account details for Jordan Smith"
+                      title="Account details"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-eye" /></svg
+                    ></a>
+                    <a
+                      href="orders.html?buyer=jordan-smith"
+                      class="icon-btn"
+                      aria-label="View order history for Jordan Smith"
+                      title="Order history"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-history" /></svg
+                    ></a>
+                    <button
+                      type="button"
+                      class="icon-btn icon-btn--danger"
+                      aria-label="Delete Jordan Smith"
+                      title="Delete user"
+                    >
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-trash" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr data-role="customer" data-status="suspended">
+                <td>
+                  <div class="user">
+                    <span class="avatar" aria-hidden="true">T</span>
+                    <div>
+                      <span class="name">Taylor Brooks</span
+                      ><span class="genre">taylor.b@example.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Customer</td>
+                <td><span class="status status--suspended">Suspended</span></td>
+                <td>Aug 20, 2026</td>
+                <td class="num">0</td>
+                <td class="num">$0.00</td>
+                <td class="col-actions">
+                  <div class="actions">
+                    <a
+                      href="user-details.html?id=taylor-brooks"
+                      class="icon-btn"
+                      aria-label="View account details for Taylor Brooks"
+                      title="Account details"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-eye" /></svg
+                    ></a>
+                    <a
+                      href="orders.html?buyer=taylor-brooks"
+                      class="icon-btn"
+                      aria-label="View order history for Taylor Brooks"
+                      title="Order history"
+                      ><svg class="icon" aria-hidden="true">
+                        <use href="#i-history" /></svg
+                    ></a>
+                    <button
+                      type="button"
+                      class="icon-btn icon-btn--danger"
+                      aria-label="Delete Taylor Brooks"
+                      title="Delete user"
+                    >
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#i-trash" />
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="table-footer">
+          <p>Showing 1–7 of 7 users</p>
+          <div class="pager">
+            <button type="button" class="btn" disabled>Previous</button>
+            <button type="button" class="btn" disabled>Next</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

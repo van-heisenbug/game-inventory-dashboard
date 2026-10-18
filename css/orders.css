@@ -1,0 +1,81 @@
+/* Admin orders: load AFTER main.css (reuses its tokens, admin bar, toolbar, chips, table, footer) */
+
+.orders-card table {
+  min-width: 1000px;
+}
+
+/* No dropdown menus on this page, so the table can scroll sideways */
+.orders-card .table-wrap {
+  overflow-x: auto;
+}
+
+.order-id a {
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.order-id a:hover {
+  color: var(--accent);
+}
+
+.games {
+  list-style: none;
+}
+
+.games a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.games a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.games span {
+  color: var(--text-muted);
+}
+
+/* Status badges */
+.status {
+  display: inline-block;
+  padding: 0.05rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.status--paid {
+  color: #4ade80;
+  background: rgb(74 222 128 / 0.12);
+}
+
+.status--refunded {
+  color: var(--warn);
+  background: rgb(251 191 36 / 0.12);
+}
+
+.status--cancelled {
+  color: var(--text-muted);
+  background: rgb(138 151 171 / 0.15);
+}
+
+.deadline {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--warn);
+  font-size: 0.78rem;
+}
+
+/* Status chips filter the rows (CSS only) */
+.orders-card:has(#f-paid:checked) tbody tr:not([data-status="paid"]),
+.orders-card:has(#f-refunded:checked) tbody tr:not([data-status="refunded"]),
+.orders-card:has(#f-cancelled:checked) tbody tr:not([data-status="cancelled"]),
+.orders-card:has(#f-eligible:checked) tbody tr:not([data-refundable]) {
+  display: none;
+}
+
+.icon-btn {
+  text-decoration: none;
+}

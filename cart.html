@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Pixelshelf – Your cart</title>
+    <link rel="stylesheet" href="css/storefront.css" />
+    <link rel="stylesheet" href="css/cart.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-cart" viewBox="0 0 24 24">
+        <circle cx="9" cy="21" r="1" />
+        <circle cx="20" cy="21" r="1" />
+        <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" />
+      </symbol>
+      <symbol id="i-history" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <path
+          d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"
+        />
+      </symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="m16 17 5-5-5-5" />
+        <path d="M21 12H9" />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24">
+        <path d="M3 6h18" />
+        <path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2" />
+        <path d="m19 6-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+        <path d="M10 11v6M14 11v6" />
+      </symbol>
+    </svg>
+
+    <!-- Header (same as storefront, minus search) -->
+    <header class="site-header">
+      <div class="wrap">
+        <a href="storefront.html" class="brand">Pixelshelf</a>
+
+        <div class="header-actions">
+          <a
+            href="cart.html"
+            class="icon-link"
+            aria-label="Cart, 4 items"
+            aria-current="page"
+            title="Cart"
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-cart" /></svg>
+            <span class="count" aria-hidden="true">4</span>
+          </a>
+
+          <details class="menu">
+            <summary aria-label="Account menu">
+              <span class="avatar" aria-hidden="true">A</span>
+              <span class="menu__name">Alex</span>
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-chevron" />
+              </svg>
+            </summary>
+            <div class="menu__panel">
+              <div class="menu__user">
+                <strong>Alex Rivera</strong>
+                <span>alex@example.com</span>
+              </div>
+              <a href="account.html" class="menu__item">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-settings" />
+                </svg>
+                Account settings
+              </a>
+              <a href="history.html" class="menu__item">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-history" />
+                </svg>
+                Purchase history
+              </a>
+              <hr />
+              <button type="button" class="menu__item menu__item--danger">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-logout" />
+                </svg>
+                Sign out
+              </button>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <a href="storefront.html" class="back">Continue shopping</a>
+      <h1 class="cart-title">Your cart</h1>
+
+      <div class="cart-layout">
+        <!-- Line items -->
+        <section class="panel" aria-label="Items in your cart">
+          <ul class="lines">
+            <li class="line">
+              <div class="thumb" style="--hue: 18" aria-hidden="true">H</div>
+              <div class="line__info">
+                <p class="line__name">Hades</p>
+                <p class="line__unit">$24.99 each</p>
+              </div>
+              <div class="qty" role="group" aria-label="Quantity for Hades">
+                <button type="button" aria-label="Decrease quantity of Hades">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-minus" />
+                  </svg>
+                </button>
+                <input
+                  type="number"
+                  min="1"
+                  max="99"
+                  value="2"
+                  aria-label="Quantity of Hades"
+                />
+                <button type="button" aria-label="Increase quantity of Hades">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-plus" />
+                  </svg>
+                </button>
+              </div>
+              <p class="line__sub">
+                <span class="sr-only">Subtotal </span>$49.98
+              </p>
+              <button
+                type="button"
+                class="remove"
+                aria-label="Remove Hades from cart"
+                title="Remove"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-trash" />
+                </svg>
+              </button>
+            </li>
+
+            <li class="line">
+              <div class="thumb" style="--hue: 350" aria-hidden="true">E</div>
+              <div class="line__info">
+                <p class="line__name">Elden Ring</p>
+                <p class="line__unit">$59.99 each</p>
+              </div>
+              <div
+                class="qty"
+                role="group"
+                aria-label="Quantity for Elden Ring"
+              >
+                <button
+                  type="button"
+                  aria-label="Decrease quantity of Elden Ring"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-minus" />
+                  </svg>
+                </button>
+                <input
+                  type="number"
+                  min="1"
+                  max="99"
+                  value="1"
+                  aria-label="Quantity of Elden Ring"
+                />
+                <button
+                  type="button"
+                  aria-label="Increase quantity of Elden Ring"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-plus" />
+                  </svg>
+                </button>
+              </div>
+              <p class="line__sub">
+                <span class="sr-only">Subtotal </span>$59.99
+              </p>
+              <button
+                type="button"
+                class="remove"
+                aria-label="Remove Elden Ring from cart"
+                title="Remove"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-trash" />
+                </svg>
+              </button>
+            </li>
+
+            <li class="line">
+              <div class="thumb" style="--hue: 150" aria-hidden="true">S</div>
+              <div class="line__info">
+                <p class="line__name">Stardew Valley</p>
+                <p class="line__unit">$14.99 each</p>
+              </div>
+              <div
+                class="qty"
+                role="group"
+                aria-label="Quantity for Stardew Valley"
+              >
+                <button
+                  type="button"
+                  aria-label="Decrease quantity of Stardew Valley"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-minus" />
+                  </svg>
+                </button>
+                <input
+                  type="number"
+                  min="1"
+                  max="99"
+                  value="1"
+                  aria-label="Quantity of Stardew Valley"
+                />
+                <button
+                  type="button"
+                  aria-label="Increase quantity of Stardew Valley"
+                >
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#i-plus" />
+                  </svg>
+                </button>
+              </div>
+              <p class="line__sub">
+                <span class="sr-only">Subtotal </span>$14.99
+              </p>
+              <button
+                type="button"
+                class="remove"
+                aria-label="Remove Stardew Valley from cart"
+                title="Remove"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-trash" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Summary, payment, buy -->
+        <aside class="panel checkout" aria-labelledby="summary-title">
+          <h2 id="summary-title">Order summary</h2>
+          <dl class="summary">
+            <div>
+              <dt>Items (4)</dt>
+              <dd>$124.96</dd>
+            </div>
+            <div class="total">
+              <dt>Total</dt>
+              <dd>$124.96</dd>
+            </div>
+          </dl>
+
+          <fieldset class="pay">
+            <legend>Payment method</legend>
+            <div class="methods">
+              <label class="method">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="card"
+                  class="sr-only"
+                  checked
+                />
+                Credit or debit card
+              </label>
+              <label class="method">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="paypal"
+                  class="sr-only"
+                />
+                PayPal
+              </label>
+              <label class="method">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="payoneer"
+                  class="sr-only"
+                />
+                Payoneer
+              </label>
+              <label class="method">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="applepay"
+                  class="sr-only"
+                />
+                Apple Pay
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="button" class="btn btn--block">Buy now</button>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">© 2026 Pixelshelf</div>
+    </footer>
+  </body>
+</html>

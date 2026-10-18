@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixelshelf Admin – Hades</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/game-details.css" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol>
+      <symbol id="i-tag" viewBox="0 0 24 24">
+        <path
+          d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"
+        />
+        <circle cx="7" cy="7" r="1" />
+      </symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24">
+        <path
+          d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"
+        />
+      </symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+        <path d="m16 17 5-5-5-5" />
+        <path d="M21 12H9" />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path d="m6 9 6 6 6-6" />
+      </symbol>
+    </svg>
+
+    <header class="admin-bar">
+      <a href="index.html" class="admin-bar__brand">Pixelshelf Admin</a>
+      <nav class="admin-nav" aria-label="Admin">
+        <a href="index.html" aria-current="page">Games</a>
+        <a href="orders.html">Orders</a>
+        <a href="users.html">Users</a>
+      </nav>
+      <details class="admin-menu">
+        <summary aria-label="Account menu">
+          <span class="avatar" aria-hidden="true">A</span>
+          <span class="admin-menu__name">Alex</span>
+          <svg class="icon" aria-hidden="true"><use href="#i-chevron" /></svg>
+        </summary>
+        <div class="menu-panel admin-menu__panel">
+          <div class="admin-menu__user">
+            <strong>Alex Rivera</strong>
+            <span>alex@example.com</span>
+          </div>
+          <a href="account.html" class="menu-item">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-settings" />
+            </svg>
+            Account settings
+          </a>
+          <hr />
+          <button type="button" class="menu-item menu-item--danger">
+            <svg class="icon" aria-hidden="true"><use href="#i-logout" /></svg>
+            Sign out
+          </button>
+        </div>
+      </details>
+    </header>
+
+    <main>
+      <a href="index.html" class="back-link">Back to games</a>
+
+      <!-- Title + actions -->
+      <div class="detail-head">
+        <div class="detail-head__title">
+          <div class="cover-lg" style="--hue: 18" aria-hidden="true">H</div>
+          <div>
+            <h1>Hades</h1>
+            <p class="meta">
+              Roguelike <span class="badge badge--ok">In stock</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button type="button" class="btn">
+            <svg class="icon" aria-hidden="true"><use href="#i-plus" /></svg>
+            Add stock
+          </button>
+          <button type="button" class="btn">
+            <svg class="icon" aria-hidden="true"><use href="#i-minus" /></svg>
+            Remove stock
+          </button>
+          <button type="button" class="btn">
+            <svg class="icon" aria-hidden="true"><use href="#i-tag" /></svg>
+            Change price
+          </button>
+          <a href="orders.html?game=hades" class="btn btn--primary"
+            >View all orders</a
+          >
+        </div>
+      </div>
+
+      <div class="layout">
+        <div class="column">
+          <!-- Sales metrics -->
+          <section class="card" aria-label="Sales summary">
+            <dl class="metrics">
+              <div>
+                <dt>Units sold</dt>
+                <dd>312</dd>
+              </div>
+              <div>
+                <dt>Units refunded</dt>
+                <dd>6</dd>
+              </div>
+              <div>
+                <dt>Total sales value</dt>
+                <dd>$7,796.88</dd>
+              </div>
+              <div>
+                <dt>Total refunds value</dt>
+                <dd>$149.94</dd>
+              </div>
+            </dl>
+          </section>
+
+          <!-- Stock history (newest first) -->
+          <section class="card history" aria-labelledby="history-title">
+            <div class="card__head">
+              <h2 id="history-title">Stock history</h2>
+              <span>7 entries</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Reason</th>
+                    <th scope="col" class="num">Change</th>
+                    <th scope="col" class="num">Stock after</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Oct 18, 2026</td>
+                    <td>Restock</td>
+                    <td class="num qty-pos">+40</td>
+                    <td class="num">128</td>
+                  </tr>
+                  <tr>
+                    <td>Oct 12, 2026</td>
+                    <td>Sold</td>
+                    <td class="num qty-neg">−10</td>
+                    <td class="num">88</td>
+                  </tr>
+                  <tr>
+                    <td>Sep 20, 2026</td>
+                    <td>Sold</td>
+                    <td class="num qty-neg">−87</td>
+                    <td class="num">98</td>
+                  </tr>
+                  <tr>
+                    <td>Sep 1, 2026</td>
+                    <td>Restock</td>
+                    <td class="num qty-pos">+50</td>
+                    <td class="num">185</td>
+                  </tr>
+                  <tr>
+                    <td>Aug 9, 2026</td>
+                    <td>Sold</td>
+                    <td class="num qty-neg">−95</td>
+                    <td class="num">135</td>
+                  </tr>
+                  <tr>
+                    <td>Jul 14, 2026</td>
+                    <td>Sold</td>
+                    <td class="num qty-neg">−120</td>
+                    <td class="num">230</td>
+                  </tr>
+                  <tr>
+                    <td>Jun 2, 2026</td>
+                    <td>Initial stock</td>
+                    <td class="num qty-pos">+350</td>
+                    <td class="num">350</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- Details -->
+        <aside class="card panel" aria-labelledby="details-title">
+          <h2 id="details-title">Details</h2>
+          <dl class="stats stats--plain">
+            <div>
+              <dt>Genre</dt>
+              <dd>Roguelike</dd>
+            </div>
+            <div>
+              <dt>Price</dt>
+              <dd>$24.99</dd>
+            </div>
+            <div>
+              <dt>Current stock</dt>
+              <dd>128 <span class="badge badge--ok">In stock</span></dd>
+            </div>
+            <div>
+              <dt>First added</dt>
+              <dd>Jun 2, 2026</dd>
+            </div>
+            <div>
+              <dt>Last restocked</dt>
+              <dd>Oct 18, 2026</dd>
+            </div>
+            <div>
+              <dt>Net sales</dt>
+              <dd>$7,646.94</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

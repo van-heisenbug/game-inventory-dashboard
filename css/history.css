@@ -1,0 +1,348 @@
+/* Purchase history: load AFTER storefront.css (reuses tokens, header, .btn, .select, .search, .page-head) */
+:root {
+  --ok: #4ade80;
+}
+
+/* Filters row (overrides the header-sized search from storefront.css) */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.filters .search {
+  flex: 1;
+  min-width: 14rem;
+  max-width: 26rem;
+  margin-left: 0;
+}
+
+/* ---------- Order cards ---------- */
+.orders {
+  display: grid;
+  gap: 1.25rem;
+  list-style: none;
+}
+
+.order {
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.order__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.order__num {
+  font-weight: 700;
+}
+
+.order__num a:hover {
+  color: var(--accent);
+}
+
+.order__date {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.order__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.order__total {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.status {
+  padding: 0.05rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ok);
+  background: rgb(74 222 128 / 0.12);
+  border-radius: 999px;
+}
+
+.status--refunded {
+  color: var(--warn);
+  background: rgb(251 191 36 / 0.12);
+}
+
+/* Items inside an order */
+.order__items {
+  list-style: none;
+}
+
+.order__item {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.order__item + .order__item {
+  border-top: 1px solid var(--border);
+}
+
+.thumb {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-weight: 800;
+  color: rgb(255 255 255 / 0.85);
+  border-radius: 6px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--hue) 50% 32%),
+    hsl(calc(var(--hue) + 40) 55% 16%)
+  );
+}
+
+.item-name {
+  font-weight: 600;
+}
+
+.item-qty {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.item-sub {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.order__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+.order__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn--ghost {
+  color: var(--text);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: #222e40;
+}
+
+@media (max-width: 640px) {
+  .filters .search {
+    max-width: none;
+  }
+}
+
+/* ================= v2: game links + cards/list view ================= */
+.item-name a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* The toggle only shows on wide screens; phones always use cards */
+.view-toggle {
+  display: none;
+}
+
+@media (min-width: 901px) {
+  .view-toggle {
+    display: inline-flex;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+
+  .view-toggle label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 2.1rem;
+    padding: 0 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .view-toggle label:hover {
+    color: var(--text);
+  }
+
+  .view-toggle label:has(input:checked) {
+    color: var(--accent-ink);
+    background: var(--accent);
+  }
+
+  .view-toggle label:has(input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  /* List view: one row per order. No JS, driven by the checked radio. */
+  main:has(#view-list:checked) .orders {
+    gap: 0;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  main:has(#view-list:checked) .orders > li + li {
+    border-top: 1px solid var(--border);
+  }
+
+  main:has(#view-list:checked) .order {
+    display: grid;
+    grid-template-areas: "num items pay status total actions";
+    grid-template-columns: 10.5rem 1fr 9.5rem 5.5rem 6rem auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  /* Dissolve the wrappers so their children become grid cells */
+  main:has(#view-list:checked) .order__head,
+  main:has(#view-list:checked) .order__right,
+  main:has(#view-list:checked) .order__foot {
+    display: contents;
+  }
+
+  main:has(#view-list:checked) .order__head > div:first-child {
+    grid-area: num;
+  }
+
+  main:has(#view-list:checked) .order__right .status {
+    grid-area: status;
+    justify-self: start;
+  }
+
+  main:has(#view-list:checked) .order__total {
+    grid-area: total;
+    font-size: 1rem;
+    text-align: right;
+  }
+
+  main:has(#view-list:checked) .order__foot > span {
+    grid-area: pay;
+  }
+
+  main:has(#view-list:checked) .order__actions {
+    grid-area: actions;
+  }
+
+  /* Items become a single wrapped line of names */
+  main:has(#view-list:checked) .order__items {
+    grid-area: items;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 1rem;
+  }
+
+  main:has(#view-list:checked) .order__item {
+    display: block;
+    padding: 0;
+    border-top: none;
+  }
+
+  main:has(#view-list:checked) .order__item > div {
+    display: flex;
+    gap: 0.4rem;
+    align-items: baseline;
+  }
+
+  main:has(#view-list:checked) .thumb,
+  main:has(#view-list:checked) .item-sub {
+    display: none;
+  }
+}
+
+/* ================= v3: refund eligible ================= */
+.filter-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 150ms ease;
+}
+
+.filter-btn:hover {
+  color: var(--text);
+  border-color: #34445c;
+}
+
+.filter-btn:has(input:checked) {
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.filter-btn:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.refund-note {
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.deadline {
+  display: block;
+  color: var(--warn);
+  font-size: 0.78rem;
+}
+
+.btn--cancel {
+  color: var(--danger);
+  background: transparent;
+  border: 1px solid rgb(248 113 113 / 0.4);
+}
+
+.btn--cancel:hover {
+  background: rgb(248 113 113 / 0.12);
+}
+
+/* Show only refundable orders when the filter is on */
+main:has(#filter-refund:checked) .orders > li:not([data-refundable]) {
+  display: none;
+}

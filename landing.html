@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Pixelshelf – Find your next game</title>
+    <link rel="stylesheet" href="css/storefront.css" />
+    <link rel="stylesheet" href="css/landing.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a href="landing.html" class="brand">Pixelshelf</a>
+
+        <div class="header-actions">
+          <a href="storefront.html" class="btn btn--ghost">Browse games</a>
+          <a href="login.html" class="btn">Sign in</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <h1 id="hero-title">
+            Find your next game and keep track of every purchase.
+          </h1>
+          <p>
+            Browse the catalog, pay the way you like, and manage your orders in
+            one place. Changed your mind? Eligible orders can be cancelled for a
+            refund within 3 days.
+          </p>
+          <div class="hero__actions">
+            <a href="storefront.html" class="btn btn--lg">Browse games</a>
+            <a href="login.html" class="btn btn--lg btn--ghost"
+              >Sign in or create account</a
+            >
+          </div>
+        </div>
+
+        <div class="tiles" aria-hidden="true">
+          <div class="tile" style="--hue: 18">H</div>
+          <div class="tile" style="--hue: 350">E</div>
+          <div class="tile" style="--hue: 150">S</div>
+          <div class="tile" style="--hue: 230">H</div>
+        </div>
+      </section>
+
+      <!-- Popular games -->
+      <section class="section" aria-labelledby="popular-title">
+        <div class="section__head">
+          <h2 id="popular-title">Popular right now</h2>
+          <a href="storefront.html">See all games</a>
+        </div>
+
+        <ul class="grid">
+          <li>
+            <article class="game">
+              <div class="cover" style="--hue: 18" aria-hidden="true">H</div>
+              <div class="game__body">
+                <h3>Hades</h3>
+                <p class="genre">Roguelike</p>
+                <div class="game__foot">
+                  <span class="price">$24.99</span>
+                  <a href="game.html?id=hades" class="btn">View</a>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game">
+              <div class="cover" style="--hue: 350" aria-hidden="true">E</div>
+              <div class="game__body">
+                <h3>Elden Ring</h3>
+                <p class="genre">Action</p>
+                <div class="game__foot">
+                  <span class="price">$59.99</span>
+                  <a href="game.html?id=elden-ring" class="btn">View</a>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game">
+              <div class="cover" style="--hue: 150" aria-hidden="true">S</div>
+              <div class="game__body">
+                <h3>Stardew Valley</h3>
+                <p class="genre">Simulation</p>
+                <div class="game__foot">
+                  <span class="price">$14.99</span>
+                  <a href="game.html?id=stardew-valley" class="btn">View</a>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="game">
+              <div class="cover" style="--hue: 230" aria-hidden="true">H</div>
+              <div class="game__body">
+                <h3>Hollow Knight</h3>
+                <p class="genre">Platformer</p>
+                <div class="game__foot">
+                  <span class="price">$14.99</span>
+                  <a href="game.html?id=hollow-knight" class="btn">View</a>
+                </div>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Why Pixelshelf -->
+      <section class="section" aria-labelledby="why-title">
+        <h2 id="why-title" style="margin-bottom: 1.25rem">Why shop here</h2>
+        <ul class="features">
+          <li>
+            <h3>Pay your way</h3>
+            <p>
+              Check out with a credit or debit card, PayPal, Payoneer or Apple
+              Pay.
+            </p>
+          </li>
+          <li>
+            <h3>3-day cancellation</h3>
+            <p>
+              Eligible orders can be cancelled for a refund within 3 days of
+              purchase.
+            </p>
+          </li>
+          <li>
+            <h3>Every order in one place</h3>
+            <p>
+              See your purchase history and download an invoice for any order,
+              any time.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Final call to action -->
+      <section class="cta" aria-labelledby="cta-title">
+        <h2 id="cta-title">Ready to start playing?</h2>
+        <p>Create a free account to check out and track your orders.</p>
+        <div class="hero__actions">
+          <a href="login.html" class="btn btn--lg">Create account</a>
+          <a href="storefront.html" class="btn btn--lg btn--ghost"
+            >Browse games</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© 2026 Pixelshelf</span>
+        <span
+          >Store admin?
+          <a href="login.html">Sign in to open the dashboard</a></span
+        >
+      </div>
+    </footer>
+  </body>
+</html>
